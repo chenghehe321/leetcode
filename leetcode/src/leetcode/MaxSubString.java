@@ -6,7 +6,7 @@ import java.util.Map;
 public class MaxSubString {
 
 	public int lengthOfLongestSubstring(String s) {
-		if (s == null || s.trim().length() == 0) {
+		if (s == null || s.length() == 0) {
 			return 0;
 		}
 		if (s.length() == 1) {
@@ -19,6 +19,9 @@ public class MaxSubString {
 			char endChar = s.charAt(end);
 			if (map.containsKey(endChar)) {
 				int index = map.get(endChar);
+				for (int i = start; i <= index; i++) {
+					map.remove(s.charAt(i));
+				}
 				start = index + 1;
 				map.put(endChar, end);
 				end++;
@@ -35,7 +38,7 @@ public class MaxSubString {
 	}
 
 	public static void main(String[] args) {
-		String s = "pwwpaaa";
+		String s = " ";
 		MaxSubString o = new MaxSubString();
 		System.out.println(o.lengthOfLongestSubstring(s));
 	}
